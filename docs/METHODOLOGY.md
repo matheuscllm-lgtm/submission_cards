@@ -37,7 +37,11 @@ gem_rate = quantidade_na_nota_alvo / total_graduado_da_carta
 A amostra e a incerteza acompanham a estimativa. Amostras pequenas não justificam uma
 recomendação forte; devem sofrer ajuste conservador ou resultar em `REVIEW_DATA`.
 
-O pré-screen físico altera a probabilidade por cópia, mas não substitui o histórico da carta.
+A taxa populacional é uma observação de exemplares já submetidos, não uma probabilidade
+individual calibrada. Seleção prévia, reenvios e mudanças de etiqueta podem afetá-la.
+Qualquer ajuste por pré-screen precisa de evidência, hipóteses identificadas e sensibilidade.
+Incluir notas inferiores e resultados sem graduação; as probabilidades devem somar 1.
+CGC Gem Mint, Pristine e etiquetas históricas exigem comparáveis separados.
 
 ## 4. Valor líquido
 
@@ -66,6 +70,10 @@ ROI_incremental = EV_incremental / capital_incremental
 ```
 
 O cálculo final também deve considerar prazo, liquidez e risco de dados obsoletos.
+Custos desconhecidos permanecem ausentes. Os zeros do arquivo de configuração são
+placeholders, não taxas confirmadas. Não contar custos por lote novamente por resultado.
+Custo histórico pertence ao lucro total; a decisão de submeter usa o valor RAW como
+custo de oportunidade. Retenção deliberada e dados insuficientes são estados distintos.
 
 ## 5. Escolha de rota
 

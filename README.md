@@ -56,3 +56,9 @@ quantidades ou posições pessoais sem autorização explícita.
 O estado herdado da análise de 11/09/2026 está em
 [`docs/PROJECT_STATE.md`](docs/PROJECT_STATE.md). A metodologia está em
 [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
+
+O [prompt de análise](docs/ANALYSIS_PROMPT.md) define entradas, comparáveis, custos,
+incerteza e formato de saída. Está em revisão com o usuário.
+
+GitHub Actions executa somente testes sintéticos em pushes e PRs. O motor de decisão
+e a integração privada de inventário ainda estão pendentes. A CLI não é um scanner de preços.
