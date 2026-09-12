@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import csv
+import re
+import unicodedata
+from datetime import date
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -38,14 +41,17 @@ class InventorySummary:
 
 def _parse_quantity(value: str, row_number: int) -> int:
     try:
-        quantity = int(Decimal(value.strip()))
-    except (InvalidOperation, ValueError) as exc:
+        parsed = Decimal(value.strip())
+        if not parsed.is_finite() or parsed != parsed.to_integral_value():
+            raise ValueError("Quantity must be a finite integer")
+        quantity = int(parsed)
+    except (InvalidOperation, ValueError, AttributeError) as exc:
         raise CollectrValidationError(
-            f"Invalid Quantity at CSV row {row_number}: {value!r}"
+            f"Invalid Quantity at CSV row {row_number}"
         ) from exc
     if quantity < 0:
         raise CollectrValidationError(
-            f"Negative Quantity at CSV row {row_number}: {quantity}"
+            f"Negative Quantity at CSV row {row_number}"
         )
     return quantity
 
@@ -60,24 +66,41 @@ def summarize_export(path: str | Path) -> InventorySummary:
     with source.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         headers = set(reader.fieldnames or [])
+        if len(headers) != len(reader.fieldnames or []):
+            raise CollectrValidationError("Duplicate CSV headers")
         missing = REQUIRED_COLUMNS - headers
         if missing:
             raise CollectrValidationError(
                 "Missing required columns: " + ", ".join(sorted(missing))
             )
-        if not any(header.startswith(MARKET_PRICE_PREFIX) for header in headers):
-            raise CollectrValidationError("Missing Collectr market price column")
+        price_headers = [h for h in headers if h.startswith(MARKET_PRICE_PREFIX)]
+        if len(price_headers) != 1:
+            raise CollectrValidationError("Expected one Collectr market price column")
+        match = re.fullmatch(r"Market Price \(As of (\d{4}-\d{2}-\d{2})\)", price_headers[0])
+        try:
+            if match is None:
+                raise ValueError("Invalid date format")
+            date.fromisoformat(match.group(1))
+        except ValueError as exc:
+            raise CollectrValidationError("Invalid market price date") from exc
 
         records = total_units = pokemon_records = pokemon_units = 0
         categories: set[str] = set()
 
         for row_number, row in enumerate(reader, start=2):
+            if None in row or any(value is None for value in row.values()):
+                raise CollectrValidationError(f"Malformed CSV row {row_number}")
+            for field in ("Category", "Product Name"):
+                if not row[field].strip():
+                    raise CollectrValidationError(f"Empty {field} at CSV row {row_number}")
             records += 1
             quantity = _parse_quantity(row["Quantity"], row_number)
             total_units += quantity
             category = row["Category"].strip()
             categories.add(category)
-            if "pokemon" in category.casefold():
+            normalized = unicodedata.normalize("NFKD", category.casefold())
+            normalized = "".join(c for c in normalized if not unicodedata.combining(c))
+            if normalized == "pokemon":
                 pokemon_records += 1
                 pokemon_units += quantity
 

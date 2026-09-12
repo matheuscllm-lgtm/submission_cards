@@ -22,7 +22,7 @@ def main() -> int:
     if args.command == "validate":
         try:
             summary = summarize_export(args.path)
-        except CollectrValidationError as exc:
+        except (CollectrValidationError, OSError, UnicodeError) as exc:
             print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False))
             return 2
         print(json.dumps({"ok": True, **asdict(summary)}, ensure_ascii=False, indent=2))
