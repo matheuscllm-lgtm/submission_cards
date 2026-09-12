@@ -7,8 +7,10 @@ Disponíveis: validador CSV, CLI, testes sintéticos e documentação de metodol
 Nesta revisão: prompt de análise ampliado, validação de quantidade inteira/finita,
 datas dinâmicas do export, categorias acentuadas e rejeição de linhas malformadas.
 Workflow público de CI preparado para executar apenas testes sintéticos e ajuda da CLI.
-O motor de recomendação, coletores de mercado e integração com armazenamento privado
-não foram implementados. Configurações de taxas são exemplos, não valores vigentes.
+O comparador de cenários foi implementado para entradas normalizadas em JSON, com
+horizontes de 90, 180 e 365 dias, EV líquido, valor presente, risco versus RAW e orçamento
+explícito. Não recomenda lotes: coletores, validação de evidência e alocação de carteira
+continuam pendentes. Configurações de taxas são exemplos, não valores vigentes.
 
 ## Continuidade
 
@@ -22,17 +24,23 @@ Não publicar posições, valores, contagens ou resultados de análises individu
 2. Normalizar identidade, variante, idioma e condição sem inferências silenciosas.
 3. Consultar taxas oficiais atuais e vendas realizadas por nota e empresa.
 4. Distinguir gem rate observado de previsão por cópia examinada.
-5. Definir objetivo econômico, restrições de capital e horizonte com o usuário.
-6. Implementar motor de decisão com dados ausentes explícitos.
+5. Informar valor do orçamento, limite operacional de prazo e tolerância de risco.
+6. Integrar o comparador a dados verificados e implementar alocação de carteira.
 7. Conectar entradas e saídas a armazenamento privado antes de executar análises no Actions.
 
-## Entrevista em andamento
+## Decisões aprovadas
 
-O prompt está em `docs/ANALYSIS_PROMPT.md`. Objetivo econômico, orçamento adicional,
-prazo, tolerância de perda e limites de evidência não foram aprovados.
+Priorizar lucro incremental líquido, sujeito a prazo e risco. Comparar cenários de
+90, 180 e 365 dias. Usar teto total de capital adicional, sem meta fixa de cartas.
+O usuário autorizou prosseguir com essas propostas.
+
+O valor numérico do teto, um prazo máximo único e a tolerância de perda não foram
+informados. Não supor orçamento ilimitado nem autorização automática para 365 dias.
+O prompt está em `docs/ANALYSIS_PROMPT.md`. Limites de evidência seguem em definição.
 A entrevista usa a skill pública grill-me/grilling de Matt Pocock, consultada em:
 https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md
-Ela não foi instalada como skill local. O motor econômico aguarda definição dos critérios.
+Ela não foi instalada como skill local. O cálculo pode avançar com hipóteses explícitas;
+a recomendação operacional aguarda dados de mercado e critérios restantes.
 
 ## Política de publicação
 

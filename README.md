@@ -58,7 +58,16 @@ O estado herdado da análise de 11/09/2026 está em
 [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
 O [prompt de análise](docs/ANALYSIS_PROMPT.md) define entradas, comparáveis, custos,
-incerteza e formato de saída. Está em revisão com o usuário.
+incerteza e formato de saída. Objetivo incremental e cenários de prazo foram aprovados.
 
-GitHub Actions executa somente testes sintéticos em pushes e PRs. O motor de decisão
-e a integração privada de inventário ainda estão pendentes. A CLI não é um scanner de preços.
+GitHub Actions executa somente testes sintéticos em pushes e PRs.
+O [comparador de cenários](docs/SCENARIOS.md) calcula ganho versus RAW e prazos de
+90/180/365 dias a partir de hipóteses normalizadas. Para simular:
+
+```bash
+PYTHONPATH=src python -m submission_cards.cli compare examples/scenario.synthetic.json --output outputs/private/example-comparison.json
+```
+
+O exemplo é inteiramente fictício. O comparador não consulta preços nem recomenda
+submissões. Coleta de mercado, pré-screen, limites de risco e alocação do orçamento
+continuam pendentes. Orçamento ausente é sinalizado, nunca tratado como ilimitado.
