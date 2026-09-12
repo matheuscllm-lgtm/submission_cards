@@ -1,0 +1,46 @@
+{
+  "card": {
+    "game": "Synthetic",
+    "set": "Test",
+    "number": "001",
+    "variant": "Test foil",
+    "language": "en",
+    "condition": "NM"
+  },
+  "currency": "USD",
+  "as_of": "2026-01-01",
+  "raw_net": 100,
+  "raw_receipt_days": 0,
+  "annual_discount_rate": 0,
+  "budget": null,
+  "routes": [
+    {
+      "id": "PSA_SYNTHETIC",
+      "assumption_basis": "Synthetic test data; not market evidence",
+      "upfront_costs": {
+        "grading": 20,
+        "shipping": 10
+      },
+      "outcomes": [
+        {
+          "label": "PSA 10",
+          "probability": 0.5,
+          "gross_sale": 300,
+          "sale_fee_rate": 0.1,
+          "cashout_fee_rate": 0.05,
+          "receipt_costs": 5,
+          "receipt_days": 120
+        },
+        {
+          "label": "PSA 9",
+          "probability": 0.5,
+          "gross_sale": 100,
+          "sale_fee_rate": 0.1,
+          "cashout_fee_rate": 0.05,
+          "receipt_costs": 5,
+          "receipt_days": 120
+        }
+      ]
+    }
+  ]
+}

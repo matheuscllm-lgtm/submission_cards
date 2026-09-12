@@ -1,7 +1,9 @@
 # Prompt de análise de submissão
 
-Versão de trabalho. Objetivo econômico, orçamento, horizonte e limites de risco ainda
-dependem da entrevista com o usuário. Não transformar propostas em regras aprovadas.
+Critérios aprovados: priorizar lucro incremental líquido sujeito a prazo e risco;
+comparar 90, 180 e 365 dias; usar teto total de capital adicional sem meta de quantidade.
+Valor do orçamento, prazo máximo operacional e tolerância de perda permanecem pendentes.
+Não interpretar a aprovação da abordagem como aprovação de valores não informados.
 
 ## Missão
 
@@ -108,6 +110,7 @@ Cada pergunta deve explicar o efeito prático e propor uma resposta fundamentada
 Não peça de novo informações presentes no contexto. Não trate a entrevista como concluída
 antes de o usuário concordar que os critérios estão claros.
 
-Primeira rodada: objetivo econômico principal, prazo máximo até recebimento e orçamento
-adicional para submissões. Depois: tolerância de perda, regras de pré-screen, mínimos de
-evidência e destino privado das análises. Valores permanecem pendentes até resposta.
+A abordagem econômica e os três cenários foram aprovados. Não repita essa rodada.
+Continue pela quantificação do teto de capital adicional e pelas restrições ainda
+ausentes: tolerância de perda, prazo operacional, pré-screen e mínimos de evidência.
+Enquanto faltarem esses parâmetros, entregue comparação condicional, sem fechar lotes.
