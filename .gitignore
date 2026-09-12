@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Inventário e resultados pessoais
+data/private/
+outputs/private/
+*.local.csv
+*.local.xlsx
+
+# Credenciais e configurações locais
+.env
+.env.*
+!.env.example
+config.local.toml
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
